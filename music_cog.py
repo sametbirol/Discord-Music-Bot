@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from yt_dlp import YoutubeDL
-from logging_result import log_music_search_result
+from logging_result import filter_info
 from error_logger import log_error,log_info # for logging error
 
 load_dotenv()
@@ -16,11 +16,10 @@ class music_cog(commands.Cog):
         self.is_playing = False
         self.is_paused = False
         self.music_queue = []
-
         self.YDL_OPTIONS = json.loads(os.getenv('YDL_OPTIONS'))
-
         self.FFMPEG_OPTIONS = json.loads(os.getenv('FFMPEG_OPTIONS'))
         self.vc = None
+
     def reset(self):
         self.is_playing = False
         self.is_paused = False
@@ -29,9 +28,8 @@ class music_cog(commands.Cog):
     def search_yt(self, item,guildID):
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
             try:
-                info = ydl.extract_info("ytsearch:%s" % item, download=False)
-                collectiveList = log_music_search_result(guildID, item, info)
-                return collectiveList
+                info = ydl.extract_info("ytsearch:%s" % item, download=False) 
+                return filter_info(info)
             except Exception as e:
                 log_error(e)
                 return False
