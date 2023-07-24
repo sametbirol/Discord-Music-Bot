@@ -1,0 +1,5 @@
+__pycache__
+virtualenv
+.env
+startail_log.txt
+UnknownServer_log.txt
