@@ -23,10 +23,10 @@ def log_music_search_result(server_name, search_query, result):
 
 
 def filter_formats(entry):
-    copy_top_limit = TOP_LIMIT
+    copy_bottom_limit = BOTTOM_LIMIT
     filtered_formats = []
     try:
-        while not filtered_formats and copy_top_limit < 256:
+        while not filtered_formats and copy_bottom_limit > 0:
             filtered_formats = [
                 {
                     "source": fmt["url"],
@@ -35,11 +35,11 @@ def filter_formats(entry):
                 }
                 for fmt in entry["formats"]
                 if fmt.get("abr", 0)
-                and BOTTOM_LIMIT <= fmt["abr"] <= copy_top_limit
+                and copy_bottom_limit <= fmt["abr"] <= TOP_LIMIT
                 and fmt["acodec"] != "none"
                 and fmt["vcodec"] == "none"
             ]
-            copy_top_limit += 16
+            copy_bottom_limit -= 2
 
         if filtered_formats:
             return sorted(filtered_formats, key=lambda x: x["abr"])[0]
