@@ -30,7 +30,7 @@ class OnMyWatch:
         print("🎵 Starting the music bot... 🎵")
         delete_txt_and_log_files()
         self.bot_process = subprocess.Popen(
-            ['./virtualenv/Scripts/python', 'music_bot.py'])
+            ['./.venv/Scripts/python', 'music_bot.py'])
 
     def stop_bot(self):
         if self.bot_process is not None:

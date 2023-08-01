@@ -1,5 +1,6 @@
 import os
 import discord
+import asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
 from admin_cog import admin_cog
@@ -21,4 +22,8 @@ async def on_ready():
     await bot.add_cog(help_cog(bot))
     await bot.add_cog(music_cog(bot))
     await bot.add_cog(admin_cog(bot))
+@bot.check
+async def not_in_dms(ctx):
+    ctx.send("this bot doeasn't support DM's")
+    return ctx.guild is not None
 bot.run(TOKEN)

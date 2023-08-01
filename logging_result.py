@@ -34,6 +34,10 @@ def filter_formats(entry):
                 "source": fmt["url"],
                 "title": entry["title"],
                 "abr": fmt["abr"],
+                "description" : entry["description"],
+                "thumbnail" : entry["thumbnail"],
+                "duration_string" : entry["duration_string"],
+                "webpage_url" : entry["webpage_url"],
             }
             for fmt in entry["formats"]
             if fmt.get("abr", 0)

@@ -1,5 +1,5 @@
 __pycache__
-virtualenv
+.venv
 .env
 startail_log.txt
 UnknownServer_log.txt

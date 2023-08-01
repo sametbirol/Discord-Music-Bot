@@ -39,11 +39,11 @@ class help_cog(commands.Cog):
             for channel in guild.text_channels:
                 self.text_channel_text.append(channel)
 
-        await self.send_to_all(self.embed)
+        await self.send_to_all("I am online")
 
     async def send_to_all(self, msg):
         for text_channel in self.text_channel_text:
-            await text_channel.send(embed=msg)
+            await text_channel.send(msg)
 
     @commands.command(name="help", help="Displays all the available commands")
     async def help(self, ctx):
